@@ -81,9 +81,9 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
               </Text>
             )}
             {/*A Consistent SPACER FOR MYSELF*/ }
-            <Spacer variant="left.medium" />
+            <Spacer position="left" size="large" />
             {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-            <Spacer variant="left.medium" />
+            <Spacer position="left" size="large" />
             <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
           </SectionEnd>
         </Section>
