@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {Searchbar} from 'react-native-paper';
-import {StatusBar, StyleSheet, SafeAreaView, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, SafeAreaView, Text, View, FlatList} from 'react-native';
 import styled from 'styled-components/native';
 
 import {RestaurantInfoCard} from '../components/restaurant-info-card.component';
@@ -26,7 +26,12 @@ export const RestaurantsScreen = () => (
       <Searchbar />
     </SearchContainer>
     <RestaurantListContainer>
-      <RestaurantInfoCard />
+      <FlatList
+      data={[{name: 1}, {name: 2}, {name: 3}]}
+      renderItem={() => <RestaurantInfoCard />}
+      keyExtractor={(item) => item.name}
+      contentContainerStyle={{padding: 16}}
+       />
     </RestaurantListContainer>
   </SafeArea>
 );
