@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {useContext} from 'react';
 import {Searchbar} from 'react-native-paper';
 import {StatusBar, StyleSheet, SafeAreaView, Text, View, FlatList} from 'react-native';
 import styled from 'styled-components/native';
 
 import {RestaurantInfoCard} from '../components/restaurant-info-card.component';
 import { Spacer } from '../components/spacer/spacer.component';
+import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
+
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -28,21 +30,23 @@ const RestaurantList = styled(FlatList).attrs({
   },
 })``;
 
-export const RestaurantsScreen = () => (
-  <SafeArea>
-    <SearchContainer>
-      <Searchbar />
-    </SearchContainer>
-    <RestaurantListContainer>
+export const RestaurantsScreen = () => {
+  const restaurantContext = useContext(RestaurantsContext);
+  console.log(restaurantContext)
+  return (
+    <SafeArea>
+      <SearchContainer>
+        <Searchbar />
+      </SearchContainer>
       <RestaurantList
-      data={[{name: 1}, {name: 2}, {name: 3}]}
-      renderItem={() => (
-        <Spacer position="bottom" size="large">
-          <RestaurantInfoCard />
-        </Spacer>
-      )}
-      keyExtractor={(item) => item.name}
-       />
-    </RestaurantListContainer>
-  </SafeArea>
-);
+        data={restaurantContext.restaurants}
+        renderItem={() => (
+          <Spacer position="bottom" size="large">
+            <RestaurantInfoCard />
+          </Spacer>
+        )}
+        keyExtractor={(item) => item.name}
+      />
+    </SafeArea>
+  );
+};

@@ -9,6 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeArea } from "./src/features/restaurants/components/utility/safe-area.component";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -47,8 +48,10 @@ export default function App() {
 //const screenOptions = ({route}) => ({})
 
   return (
+    
     <>
        <ThemeProvider theme={theme}>
+       <RestaurantsContextProvider>
        <NavigationContainer>
           <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -77,6 +80,7 @@ export default function App() {
             <Tab.Screen name="Settings" component={Settings} />
           </Tab.Navigator>
         </NavigationContainer>
+        </RestaurantsContextProvider>
       <StatusBar style="auto" />
       </ThemeProvider>
     </>
