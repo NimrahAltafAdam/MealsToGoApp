@@ -5,6 +5,7 @@ import {StatusBar, StyleSheet, SafeAreaView, Text, View, FlatList} from 'react-n
 import styled from 'styled-components/native';
 
 import {RestaurantInfoCard} from '../components/restaurant-info-card.component';
+import { Spacer } from '../components/spacer/spacer.component';
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -19,6 +20,13 @@ const RestaurantListContainer = styled.View`
   flex: 1;
   padding: ${props => props.theme.space[3]};
 `;
+//TO AVOID INLINE STYLING
+//attr give us access to give specific props to our default Flatlist
+const RestaurantList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 16,
+  },
+})``;
 
 export const RestaurantsScreen = () => (
   <SafeArea>
@@ -26,11 +34,14 @@ export const RestaurantsScreen = () => (
       <Searchbar />
     </SearchContainer>
     <RestaurantListContainer>
-      <FlatList
+      <RestaurantList
       data={[{name: 1}, {name: 2}, {name: 3}]}
-      renderItem={() => <RestaurantInfoCard />}
+      renderItem={() => (
+        <Spacer position="bottom" size="large">
+          <RestaurantInfoCard />
+        </Spacer>
+      )}
       keyExtractor={(item) => item.name}
-      contentContainerStyle={{padding: 16}}
        />
     </RestaurantListContainer>
   </SafeArea>
